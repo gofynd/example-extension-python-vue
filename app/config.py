@@ -15,7 +15,7 @@ class Config(BaseSettings):
     EXTENSION_BASE_URL: str
     EXTENSION_CLUSTER_URL: str
 
-    ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
+    ROOT_DIR: str = os.path.dirname(os.path.dirname(__file__))
 
     class Config:
         env_file=".env"

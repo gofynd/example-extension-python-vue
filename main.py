@@ -22,29 +22,17 @@ def create_app() -> Sanic:
     # health apis
     app.blueprint(health_bp)
 
-    # Add your Routes here
-    app.blueprint(fdk_extension_client.fdk_route)
 
     from app.urls.application import app_bp
+    
     # Add your Middlewares here
     app_bp.middleware(session_middleware, "request")
     app_bp.middleware(platform_api_on_request, "request")
 
+
     # Register your routes here
+    app.blueprint(fdk_extension_client.fdk_route)
     app.blueprint(app_bp)
-
-
-    # # Redirect routes
-    # REDIRECTS = {
-    #     '/': '/index.html',
-    # }
-    # def get_static_func(value: object):
-    #     return lambda *_, **__: value
-    
-    # for src, dest in REDIRECTS.items():
-    #     response = sanic.response.redirect(dest)
-    #     handler = get_static_func(response)
-    #     app.route(src)(handler)
     
 
     # Configure Static Files
@@ -58,17 +46,6 @@ def create_app() -> Sanic:
     @app.get("/company/<company_id>")
     async def home_page_handler(request, company_id):
         return await file(os.path.join(DIST_DIR, "index.html"), headers={"Content-Type": "text/html"})
-
-
-    # handle webhook
-    @app.post("api/v1.0/webhooks")
-    async def handle_webbhook(request):
-        try: 
-            res = await fdk_extension_client.webhook_registry.process_webhook(request)
-            print(res)
-            return json({"msg": "success"}, status=200)
-        except Exception as e:
-            return json({"msg": f"err: {str(e)}"}, status=400)
     
 
     # Boot 

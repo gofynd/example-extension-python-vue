@@ -3,8 +3,10 @@ from sanic import Blueprint
 from app.views.application import ApplicationData
 
 
-# Application Blueprint
+# Create your blueprints here
 application_bp = Blueprint("application_blueprint", url_prefix="/applications")
+
+# Register routes into blueprints
 application_bp.add_route(ApplicationData.as_view(), "/")
 
 
