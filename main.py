@@ -1,7 +1,7 @@
 import os
 
 from sanic import Sanic
-from sanic.response import file, json
+from sanic.response import file
 
 from app.factory.boot import startup, shutdown
 from app.urls.healthz import health_bp
@@ -24,15 +24,12 @@ def create_app() -> Sanic:
 
 
     from app.urls.application import app_bp
-    
-    # Add your Middlewares here
-    app_bp.middleware(session_middleware, "request")
-    app_bp.middleware(platform_api_on_request, "request")
+    fdk_extension_client.platform_api_routes.append(app_bp)
 
 
     # Register your routes here
     app.blueprint(fdk_extension_client.fdk_route)
-    app.blueprint(app_bp)
+    app.blueprint(fdk_extension_client.platform_api_routes)
     
 
     # Configure Static Files
