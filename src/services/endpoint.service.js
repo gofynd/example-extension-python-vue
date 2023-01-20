@@ -1,9 +1,10 @@
 import urlJoin from "url-join";
 import root from "window-or-global";
-let envVars = root.env || {};
 
-envVars.EXAMPLE_MAIN_URL = `${root.location.protocol}//${root.location.hostname}`;
-// envVars.EXAMPLE_MAIN_URL = `${root.location.protocol}//${root.location.hostname}:${root.location.port}`;
+let envVars = root.env || {}
+
+envVars.EXAMPLE_MAIN_URL = `${root.location.protocol}//${root.location.hostname}:${root.location.port}`;
+
 if (
   root &&
   root.process &&

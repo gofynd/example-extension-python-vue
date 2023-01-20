@@ -8,9 +8,6 @@ from app.urls.healthz import health_bp
 from app.fdk import get_extension_client 
 from app.config import CONFIG
 
-from fdk_extension.middleware.session_middleware import session_middleware
-from fdk_extension.middleware.api_middleware import platform_api_on_request
-
 from fdk_extension.extension import FdkExtensionClient
 
 def create_app() -> Sanic:
