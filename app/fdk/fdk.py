@@ -1,6 +1,6 @@
 from app.config import CONFIG
 from app.factory.redis import redis_client
-from app.fdk.exntension_handlers import ExtensionHandlers
+from app.fdk.extension_handlers import ExtensionHandlers
 
 from fdk_extension import setup_fdk
 from fdk_extension.extension import FdkExtensionClient
@@ -16,7 +16,6 @@ def get_extension_client() -> FdkExtensionClient:
     fdk_extension_client = setup_fdk({
         "api_key": CONFIG.EXTENSION_API_KEY,
         "api_secret": CONFIG.EXTENSION_API_SECRET,
-        "base_url": CONFIG.EXTENSION_BASE_URL,
         "callbacks": {
             "auth": extension_handlers.auth,
             "uninstall": extension_handlers.uninstall
