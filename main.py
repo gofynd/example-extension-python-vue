@@ -26,10 +26,13 @@ def create_app() -> Sanic:
     from app.urls.application import app_bp
     fdk_extension_client.platform_api_routes.append(app_bp)
 
+    from app.urls.partner import partner_bp
+    fdk_extension_client.partner_proxy_routes.append(partner_bp)
 
     # Register your routes here
     app.blueprint(fdk_extension_client.fdk_route)
     app.blueprint(fdk_extension_client.platform_api_routes)
+    app.blueprint(fdk_extension_client.partner_proxy_routes)
     
 
     # Configure Static Files
@@ -44,6 +47,11 @@ def create_app() -> Sanic:
     async def home_page_handler(request, company_id):
         return await file(os.path.join(DIST_DIR, "index.html"), headers={"Content-Type": "text/html"})
     
+
+    # Admin Home Page
+    @app.get("/admin")
+    async def admin_page_handler(request):
+        return await file(os.path.join(DIST_DIR, "index.html"), headers={"Content-Type": "text/html"})
 
     # Boot 
     app.register_listener(startup, "after_server_start")

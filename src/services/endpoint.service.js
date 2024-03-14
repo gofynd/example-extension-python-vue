@@ -19,6 +19,9 @@ const Endpoints = {
   },
   GET_ALL_APPLICATIONS(){
     return urlJoin(envVars.EXAMPLE_MAIN_URL, '/api/v1.0/applications')
+  },
+  GET_THEME_LIST(){
+    return urlJoin(envVars.EXAMPLE_MAIN_URL, '/adm/theme_list')
   }
 };
 

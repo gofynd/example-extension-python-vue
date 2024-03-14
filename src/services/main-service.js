@@ -17,6 +17,9 @@ const MainService = {
     getAllApplications(params = {}) {
         return axios.get(URLS.GET_ALL_APPLICATIONS());
     },
+    getThemeList(){
+        return axios.get(URLS.GET_THEME_LIST());
+    }
 }
 
 export default MainService;
