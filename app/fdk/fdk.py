@@ -1,6 +1,6 @@
 from app.config import CONFIG
 from app.factory.redis import redis_client
-from app.fdk.exntension_handlers import ExtensionHandlers
+from app.fdk.extension_handlers import ExtensionHandlers
 
 from fdk_extension import setup_fdk
 from fdk_extension.extension import FdkExtensionClient
