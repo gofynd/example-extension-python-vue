@@ -43,6 +43,10 @@ def create_app() -> Sanic:
     @app.get("/company/<company_id>")
     async def home_page_handler(request, company_id):
         return await file(os.path.join(DIST_DIR, "index.html"), headers={"Content-Type": "text/html"})
+        
+    @app.get("/company/<company_id>/application/<application_id>")
+    async def home_page_handler(request, company_id, application_id):
+        return await file(os.path.join(DIST_DIR, "index.html"), headers={"Content-Type": "text/html"})
     
 
     # Boot 
